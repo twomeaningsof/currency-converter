@@ -1,13 +1,7 @@
 import "./Input.css";
 
-function Input({ value, setValue }) {
-  return (
-    <input
-      value={value}
-      onChange={(e) => setValue(e.target.value)}
-      className="input"
-    />
-  );
+function Input({ value, onChange }) {
+  return <input value={value} onChange={onChange} className="input" />;
 }
 
 export default Input;
