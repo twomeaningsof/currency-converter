@@ -11,7 +11,7 @@ function App() {
   const [selectValue, setSelectValue] = useState("");
   const handleSelectChange = (event) => setSelectValue(event.target.value);
 
-  const options = [
+  const currencies = [
     { currency: "USD" },
     { currency: "PLN" },
     { currency: "EUR" },
@@ -27,7 +27,10 @@ function App() {
       <Select
         value={selectValue}
         onChange={handleSelectChange}
-        options={options}
+        options={currencies.map(({ currency }) => ({
+          value: currency,
+          label: currency,
+        }))}
       />
     </>
   );

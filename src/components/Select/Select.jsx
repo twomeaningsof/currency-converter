@@ -1,16 +1,13 @@
 import "./Select.css";
-import { v4 as uuidv4 } from "uuid";
 
-function Select({ value, onChange, options }) {
-  const selectOptions = options.map(({ currency }) => (
-    <option value={currency} key={uuidv4()}>
-      {currency}
-    </option>
-  ));
-
+function Select({ options, ...props }) {
   return (
-    <select value={value} onChange={onChange}>
-      {selectOptions}
+    <select {...props}>
+      {options.map(({ value, label }) => (
+        <option value={value} key={value}>
+          {label}
+        </option>
+      ))}
     </select>
   );
 }
