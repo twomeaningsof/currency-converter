@@ -11,7 +11,7 @@ function App() {
     { currency: "GBP" },
   ];
 
-  const currenciesTable = [
+  const currenciesForTable = [
     { name: "EUR-USD", value: 1, change: 0.341 },
     { name: "GBP-USD", value: 1, change: 1.231 },
     { name: "PLN-USD", value: 1, change: 1.666 },
@@ -25,7 +25,7 @@ function App() {
           element={
             <CurrenciesListPage
               currencies={currencies}
-              currenciesTable={currenciesTable}
+              currenciesForTable={currenciesForTable}
             />
           }
         />

@@ -3,7 +3,7 @@ import Select from "../components/Select";
 import Table from "../components/Table";
 import { useState } from "react";
 
-function CurrenciesListPage({ currencies, currenciesTable }) {
+function CurrenciesListPage({ currencies, currenciesForTable }) {
   const [selectValue, setSelectValue] = useState("");
   const handleSelectChange = (event) => setSelectValue(event.target.value);
 
@@ -19,7 +19,7 @@ function CurrenciesListPage({ currencies, currenciesTable }) {
           label: currency,
         }))}
       />
-      <Table currenciesTable={currenciesTable} />
+      <Table currenciesForTable={currenciesForTable} />
     </>
   );
 }
