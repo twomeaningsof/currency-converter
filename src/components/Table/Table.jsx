@@ -1,31 +1,23 @@
 import "./Table.css";
 
-function Table({ currenciesForTable }) {
-  return (
-    <table>
-      <thead>
-        <tr key={`head`}>
-          <td className="header-cell">Currency</td>
-          <td className="header-cell middle-cell">Value</td>
-          <td className="header-cell">Change</td>
-        </tr>
-      </thead>
-      <tbody>
-        {currenciesForTable.map(({ name, value, change }) => (
-          <tr key={name}>
-            <td className="body-cell currency-comparison-cell">
-              <div className="currency-comparison-cell-inside-wrapper">
-                <div>{name}</div>
-                <button className="details-vector"></button>
-              </div>
-            </td>
-            <td className="body-cell middle-cell">{value}</td>
-            <td className="body-cell">{change}</td>
-          </tr>
-        ))}
-      </tbody>
-    </table>
-  );
+function Table({ children }) {
+  return <table>{children}</table>;
 }
 
 export default Table;
+
+export function Thead({ children }) {
+  return <thead>{children}</thead>;
+}
+
+export function Tbody({ children }) {
+  return <tbody>{children}</tbody>;
+}
+
+export function Tr({ key, children }) {
+  return <tr key={key}>{children}</tr>;
+}
+
+export function Td({ className, children }) {
+  return <td className={className}>{children}</td>;
+}

@@ -1,6 +1,6 @@
 import Heading from "../components/Heading";
 import Select from "../components/Select";
-import Table from "../components/Table";
+import Table, { Thead, Tbody, Tr, Td } from "../components/Table";
 import { useState } from "react";
 
 function CurrenciesListPage({ currencies, currenciesForTable }) {
@@ -19,7 +19,29 @@ function CurrenciesListPage({ currencies, currenciesForTable }) {
           label: currency,
         }))}
       />
-      <Table currenciesForTable={currenciesForTable} />
+      <Table>
+        <Thead>
+          <Tr key={"head"}>
+            <Td className="header-cell">Currency</Td>
+            <Td className="header-cell middle-cell">Value</Td>
+            <Td className="header-cell">Change</Td>
+          </Tr>
+        </Thead>
+        <Tbody>
+          {currenciesForTable.map(({ name, value, change }) => (
+            <Tr key={name}>
+              <Td className="body-cell currency-comparison-cell">
+                <div className="currency-comparison-cell-inside-wrapper">
+                  <div>{name}</div>
+                  <button className="details-vector"></button>
+                </div>
+              </Td>
+              <Td className="body-cell middle-cell">{value}</Td>
+              <Td className="body-cell">{change}</Td>
+            </Tr>
+          ))}
+        </Tbody>
+      </Table>
     </>
   );
 }
