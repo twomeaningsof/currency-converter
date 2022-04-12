@@ -22,22 +22,26 @@ function CurrenciesListPage({ currencies, currenciesForTable }) {
       <Table>
         <Thead>
           <Tr key={"head"}>
-            <Td className="header-cell">Currency</Td>
-            <Td className="header-cell middle-cell">Value</Td>
-            <Td className="header-cell">Change</Td>
+            <Td variant="header">Currency</Td>
+            <Td variant="header" isMiddle>
+              Value
+            </Td>
+            <Td variant="header">Change</Td>
           </Tr>
         </Thead>
         <Tbody>
           {currenciesForTable.map(({ name, value, change }) => (
             <Tr key={name}>
-              <Td className="body-cell currency-comparison-cell">
+              <Td variant="body" isCurrencyComparison>
                 <div className="currency-comparison-cell-inside-wrapper">
                   <div>{name}</div>
                   <button className="details-vector"></button>
                 </div>
               </Td>
-              <Td className="body-cell middle-cell">{value}</Td>
-              <Td className="body-cell">{change}</Td>
+              <Td variant="body" isMiddle>
+                {value}
+              </Td>
+              <Td variant="body">{change}</Td>
             </Tr>
           ))}
         </Tbody>
