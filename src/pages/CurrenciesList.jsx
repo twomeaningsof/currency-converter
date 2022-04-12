@@ -3,9 +3,15 @@ import Select from "../components/Select";
 import Table, { Thead, Tbody, Tr, Td } from "../components/Table";
 import { useState } from "react";
 
-function CurrenciesListPage({ currencies, currenciesForTable }) {
+function CurrenciesListPage({ currencies }) {
   const [selectValue, setSelectValue] = useState("");
   const handleSelectChange = (event) => setSelectValue(event.target.value);
+
+  const currenciesForTable = [
+    { name: "EUR-USD", value: 1, change: 0.341 },
+    { name: "GBP-USD", value: 1, change: 1.231 },
+    { name: "PLN-USD", value: 1, change: 1.666 },
+  ];
 
   return (
     <>
@@ -32,7 +38,7 @@ function CurrenciesListPage({ currencies, currenciesForTable }) {
         <Tbody>
           {currenciesForTable.map(({ name, value, change }) => (
             <Tr key={name}>
-              <Td variant="body" isCurrencyComparison>
+              <Td variant="body">
                 <div className="currency-comparison-cell-inside-wrapper">
                   <div>{name}</div>
                   <button className="details-vector"></button>

@@ -37,14 +37,11 @@ tbody {
   padding-left: 16px;
 }
 
-.currency-comparison-cell {
-  font-weight: 700;
-}
-
 .currency-comparison-cell-inside-wrapper {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  font-weight: 700;
 }
 
 .details-vector {
