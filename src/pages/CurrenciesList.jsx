@@ -1,7 +1,7 @@
 import Heading from "../components/Heading";
 import Select from "../components/Select";
 import Table, { Thead, Tbody, Tr, Td } from "../components/Table";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 function CurrenciesListPage({ currencies }) {
   const currenciesForTableUSD = [
@@ -29,13 +29,15 @@ function CurrenciesListPage({ currencies }) {
   ];
   const [selectValue, setSelectValue] = useState("PLN");
   const [currencyList, setCurrencyList] = useState(currenciesForTablePLN);
-  const handleSelectChange = (event) => {
-    setSelectValue(event.target.value);
+
+  const handleSelectChange = (event) => setSelectValue(event.target.value);
+
+  useEffect(() => {
     if (selectValue === "PLN") setCurrencyList(currenciesForTablePLN);
     if (selectValue === "GBP") setCurrencyList(currenciesForTableGBP);
     if (selectValue === "USD") setCurrencyList(currenciesForTableUSD);
     if (selectValue === "EUR") setCurrencyList(currenciesForTableEUR);
-  };
+  }, [selectValue]);
 
   return (
     <>
