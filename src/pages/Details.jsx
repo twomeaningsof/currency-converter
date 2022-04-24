@@ -3,22 +3,22 @@ import Select from "../components/Select";
 import Input from "../components/Input";
 import { useState, useEffect } from "react";
 
-function DetailsPage({ currencies }) {
-  const allCurrenciesSetUp = [
-    { name: "USD-EUR", value: 1, change: 0.924 },
-    { name: "USD-GBP", value: 1, change: 0.762 },
-    { name: "USD-PLN", value: 1, change: 4.261 },
-    { name: "PLN-EUR", value: 1, change: 0.215 },
-    { name: "PLN-GBP", value: 1, change: 0.178 },
-    { name: "PLN-USD", value: 1, change: 0.234 },
-    { name: "EUR-PLN", value: 1, change: 4.641 },
-    { name: "EUR-GBP", value: 1, change: 0.828 },
-    { name: "EUR-USD", value: 1, change: 1.082 },
-    { name: "GBP-EUR", value: 1, change: 1.204 },
-    { name: "GBP-PLN", value: 1, change: 5.601 },
-    { name: "GBP-USD", value: 1, change: 1.312 },
-  ];
+const allCurrenciesSetUp = [
+  { name: "USD-EUR", value: 1, change: 0.924 },
+  { name: "USD-GBP", value: 1, change: 0.762 },
+  { name: "USD-PLN", value: 1, change: 4.261 },
+  { name: "PLN-EUR", value: 1, change: 0.215 },
+  { name: "PLN-GBP", value: 1, change: 0.178 },
+  { name: "PLN-USD", value: 1, change: 0.234 },
+  { name: "EUR-PLN", value: 1, change: 4.641 },
+  { name: "EUR-GBP", value: 1, change: 0.828 },
+  { name: "EUR-USD", value: 1, change: 1.082 },
+  { name: "GBP-EUR", value: 1, change: 1.204 },
+  { name: "GBP-PLN", value: 1, change: 5.601 },
+  { name: "GBP-USD", value: 1, change: 1.312 },
+];
 
+function DetailsPage({ currencies }) {
   const [currentSetUp, setCurrentSetUp] = useState({
     base: "PLN",
     second: "USD",
@@ -26,28 +26,22 @@ function DetailsPage({ currencies }) {
     reversedChange: 4.261,
   });
 
-  const handleBaseToSecondCalculation = (num) => num * currentSetUp.change;
-
-  const handleSecondToBaseCalculation = (num) =>
-    num * currentSetUp.reversedChange;
-
   const [baseInputValue, setBaseInputValue] = useState(1);
+  const [selectValueFirstRow, setSelectValueFirstRow] = useState("PLN");
+  const [selectValueSecondRow, setSelectValueSecondRow] = useState("USD");
+  const [secondInputValue, setSecondInputValue] = useState(
+    1 * currentSetUp.change
+  );
   const handleBaseInputValueChange = (event) => {
     const value = event.target.value;
     setBaseInputValue(value);
-    setSecondInputValue(handleBaseToSecondCalculation(value));
+    setSecondInputValue(value * currentSetUp.change);
   };
-
-  const [secondInputValue, setSecondInputValue] = useState(
-    handleBaseToSecondCalculation(1)
-  );
   const handleSecondInputValueChange = (event) => {
     const value = event.target.value;
     setSecondInputValue(value);
-    setBaseInputValue(handleSecondToBaseCalculation(value));
+    setBaseInputValue(value * currentSetUp.reversedChange);
   };
-
-  const [selectValueFirstRow, setSelectValueFirstRow] = useState("PLN");
   const handleSelectChangeFirstRow = (event) => {
     const value = event.target.value;
     setSelectValueFirstRow(value);
@@ -61,8 +55,6 @@ function DetailsPage({ currencies }) {
     }).change;
     setCurrentSetUp(newSetup);
   };
-
-  const [selectValueSecondRow, setSelectValueSecondRow] = useState("USD");
   const handleSelectChangeSecondRow = (event) => {
     const value = event.target.value;
     setSelectValueSecondRow(value);
@@ -76,10 +68,9 @@ function DetailsPage({ currencies }) {
     }).change;
     setCurrentSetUp(newSetup);
   };
-
   useEffect(() => {
     setBaseInputValue(1);
-    setSecondInputValue(handleBaseToSecondCalculation(1));
+    setSecondInputValue(1 * currentSetUp.change);
   }, [currentSetUp]);
 
   return (

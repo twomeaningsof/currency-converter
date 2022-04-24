@@ -2,42 +2,13 @@ import Heading from "../components/Heading";
 import Select from "../components/Select";
 import Table, { Thead, Tbody, Tr, Td } from "../components/Table";
 import { useState, useEffect } from "react";
+import { getMockCurrencies } from "../utils/getMockCurrencies";
 
 function CurrenciesListPage({ currencies }) {
-  const currenciesForTableUSD = [
-    { name: "USD-EUR", value: 1, change: 0.924 },
-    { name: "USD-GBP", value: 1, change: 0.762 },
-    { name: "USD-PLN", value: 1, change: 4.261 },
-  ];
-
-  const currenciesForTablePLN = [
-    { name: "PLN-EUR", value: 1, change: 0.215 },
-    { name: "PLN-GBP", value: 1, change: 0.178 },
-    { name: "PLN-USD", value: 1, change: 0.234 },
-  ];
-
-  const currenciesForTableEUR = [
-    { name: "EUR-PLN", value: 1, change: 4.641 },
-    { name: "EUR-GBP", value: 1, change: 0.828 },
-    { name: "EUR-USD", value: 1, change: 1.082 },
-  ];
-
-  const currenciesForTableGBP = [
-    { name: "GBP-EUR", value: 1, change: 1.204 },
-    { name: "GBP-PLN", value: 1, change: 5.601 },
-    { name: "GBP-USD", value: 1, change: 1.312 },
-  ];
   const [selectValue, setSelectValue] = useState("PLN");
-  const [currencyList, setCurrencyList] = useState(currenciesForTablePLN);
+  const currencyList = getMockCurrencies(selectValue);
 
   const handleSelectChange = (event) => setSelectValue(event.target.value);
-
-  useEffect(() => {
-    if (selectValue === "PLN") setCurrencyList(currenciesForTablePLN);
-    if (selectValue === "GBP") setCurrencyList(currenciesForTableGBP);
-    if (selectValue === "USD") setCurrencyList(currenciesForTableUSD);
-    if (selectValue === "EUR") setCurrencyList(currenciesForTableEUR);
-  }, [selectValue]);
 
   return (
     <>
