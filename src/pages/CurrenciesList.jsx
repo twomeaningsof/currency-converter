@@ -1,17 +1,14 @@
 import Heading from "../components/Heading";
 import Select from "../components/Select";
 import Table, { Thead, Tbody, Tr, Td } from "../components/Table";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { getMockCurrencies } from "../utils/getMockCurrencies";
 
 function CurrenciesListPage({ currencies }) {
-  const [selectValue, setSelectValue] = useState("");
-  const handleSelectChange = (event) => setSelectValue(event.target.value);
+  const [selectValue, setSelectValue] = useState("PLN");
+  const currencyList = getMockCurrencies(selectValue);
 
-  const currenciesForTable = [
-    { name: "EUR-USD", value: 1, change: 0.341 },
-    { name: "GBP-USD", value: 1, change: 1.231 },
-    { name: "PLN-USD", value: 1, change: 1.666 },
-  ];
+  const handleSelectChange = (event) => setSelectValue(event.target.value);
 
   return (
     <>
@@ -36,7 +33,7 @@ function CurrenciesListPage({ currencies }) {
           </Tr>
         </Thead>
         <Tbody>
-          {currenciesForTable.map(({ name, value, change }) => (
+          {currencyList.map(({ name, value, change }) => (
             <Tr key={name}>
               <Td variant="body">
                 <div className="currency-comparison-cell-inside-wrapper">
