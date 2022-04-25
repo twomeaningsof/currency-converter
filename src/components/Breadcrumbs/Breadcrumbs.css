@@ -9,17 +9,19 @@
 }
 
 .navigation__element {
-  margin-right: 8px;
-  cursor: pointer;
   color: rgba(0, 0, 0, 0.54);
   text-decoration: none;
+  cursor: pointer;
+}
+
+.navigation__element li {
+  cursor: pointer;
 }
 
 .navigation__element--active {
   font-weight: 500;
-  margin-right: 8px;
 }
 
 .navigation__separator {
-  margin-right: 8px;
+  margin: 0px 8px;
 }

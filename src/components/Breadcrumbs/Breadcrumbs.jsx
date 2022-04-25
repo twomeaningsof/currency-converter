@@ -1,50 +1,42 @@
 import "./Breadcrumbs.css";
 import { Link } from "react-router-dom";
+import React from "react";
 
-function Breadcrumbs({ route }) {
-  const variant = route.length === 1 ? "short" : "long";
-  let toRender;
+function ListItem({ className = "", children }) {
+  return <li className={className}>{children}</li>;
+}
 
-  if (variant === "short") {
-    toRender = (
-      <li key={route[0]} className="navigation__element--active">
-        {route[0]}
-      </li>
-    );
-  } else {
-    toRender = route.map((pageName, index) => {
-      const className =
-        index + 1 === route.length
-          ? "navigation__element--active"
-          : "navigation__element";
-
-      const base = (
-        <li key={pageName} className={className}>
-          {pageName}
-        </li>
-      );
-
-      if (index) {
-        return (
-          <>
-            <li
-              key={`Separator-${index + 1}`}
-              className="navigation__separator"
-            >
-              /
-            </li>
-            {base}
-          </>
-        );
-      } else {
-        return <Link to="/">{base}</Link>;
-      }
-    });
-  }
+function Breadcrumbs({ routes }) {
+  const variant = routes.length === 1 ? "short" : "long";
 
   return (
     <nav>
-      <ul className="navigation">{toRender}</ul>
+      <ul className="navigation">
+        {variant === "short" && (
+          <ListItem className="navigation__element--active">
+            {routes[0]}
+          </ListItem>
+        )}
+        {variant === "long" &&
+          routes.map((pageName, index) => {
+            const withClass = index + 1 === routes.length;
+            console.log(pageName, index);
+            return index === 0 ? (
+              <Link key={pageName} to="/" className="navigation__element">
+                <ListItem>{pageName}</ListItem>
+              </Link>
+            ) : (
+              <React.Fragment key={pageName}>
+                <ListItem className="navigation__separator">/</ListItem>
+                <ListItem
+                  className={withClass && "navigation__element--active"}
+                >
+                  {pageName}
+                </ListItem>
+              </React.Fragment>
+            );
+          })}
+      </ul>
     </nav>
   );
 }

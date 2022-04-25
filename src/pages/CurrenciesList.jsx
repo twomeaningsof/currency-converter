@@ -3,9 +3,9 @@ import Heading from "../components/Heading";
 import Select from "../components/Select";
 import Table, { Thead, Tbody, Tr, Td } from "../components/Table";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import { getMockCurrencies } from "../utils/getMockCurrencies";
-
-const route = ["Currencies list"];
+import { routes } from "../constants/routes";
 
 function CurrenciesListPage({ currencies }) {
   const [selectValue, setSelectValue] = useState("PLN");
@@ -15,7 +15,7 @@ function CurrenciesListPage({ currencies }) {
 
   return (
     <>
-      <Breadcrumbs route={route} />
+      <Breadcrumbs routes={routes.slice(0, 1)} />
       <Heading variant="h1">Currency converter</Heading>
       <Heading variant="h2">Choose base currency</Heading>
       <Select
@@ -42,7 +42,9 @@ function CurrenciesListPage({ currencies }) {
               <Td variant="body">
                 <div className="currency-comparison-cell-inside-wrapper">
                   <div>{name}</div>
-                  <button className="details-vector"></button>
+                  <Link to={`/details/${selectValue.toLowerCase()}`}>
+                    <button className="details-vector"></button>
+                  </Link>
                 </div>
               </Td>
               <Td variant="body" isMiddle>

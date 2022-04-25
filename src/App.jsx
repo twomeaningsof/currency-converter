@@ -19,7 +19,7 @@ function App() {
           element={<CurrenciesListPage currencies={currencies} />}
         />
         <Route
-          path="/details"
+          path="/details/:currency"
           element={<DetailsPage currencies={currencies} />}
         />
       </Routes>
