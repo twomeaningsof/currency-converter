@@ -1,12 +1,8 @@
-import Breadcrumbs from "../components/Breadcrumbs";
 import Heading from "../components/Heading";
 import Select from "../components/Select";
 import Input from "../components/Input";
 import { useState, useEffect } from "react";
 import { getSelectOptionsFromCurrencies } from "../utils/getSelectOptionsFromCurrencies";
-import { useLocation, matchPath } from "react-router-dom";
-
-const route = ["Currencies list", "Details"];
 
 const allCurrenciesSetUp = [
   { name: "USD-EUR", value: 1, change: 0.924 },
@@ -24,9 +20,6 @@ const allCurrenciesSetUp = [
 ];
 
 function DetailsPage({ currencies }) {
-  const location = useLocation();
-  matchPath({ path: "/", end: false }, location.pathname);
-
   const [currentSetUp, setCurrentSetUp] = useState({
     base: "PLN",
     second: "USD",
@@ -83,7 +76,6 @@ function DetailsPage({ currencies }) {
 
   return (
     <>
-      <Breadcrumbs route={route} />
       <Heading variant="h1">Currency converter</Heading>
       <Heading variant="h2">Convert values</Heading>
       <Input value={baseInputValue} onChange={handleBaseInputValueChange} />

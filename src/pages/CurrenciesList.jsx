@@ -1,11 +1,8 @@
-import Breadcrumbs from "../components/Breadcrumbs";
 import Heading from "../components/Heading";
 import Select from "../components/Select";
 import Table, { Thead, Tbody, Tr, Td } from "../components/Table";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { getMockCurrencies } from "../utils/getMockCurrencies";
-
-const route = ["Currencies list"];
 
 function CurrenciesListPage({ currencies }) {
   const [selectValue, setSelectValue] = useState("PLN");
@@ -15,7 +12,6 @@ function CurrenciesListPage({ currencies }) {
 
   return (
     <>
-      <Breadcrumbs route={route} />
       <Heading variant="h1">Currency converter</Heading>
       <Heading variant="h2">Choose base currency</Heading>
       <Select
