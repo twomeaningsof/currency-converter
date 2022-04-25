@@ -2,6 +2,7 @@ import Heading from "../components/Heading";
 import Select from "../components/Select";
 import Input from "../components/Input";
 import { useState, useEffect } from "react";
+import { getSelectOptionsFromCurrencies } from "../utils/getSelectOptionsFromCurrencies";
 
 const allCurrenciesSetUp = [
   { name: "USD-EUR", value: 1, change: 0.924 },
@@ -81,23 +82,19 @@ function DetailsPage({ currencies }) {
       <Select
         value={selectValueFirstRow}
         onChange={handleSelectChangeFirstRow}
-        options={currencies
-          .map(({ currency }) => ({
-            value: currency,
-            label: currency,
-          }))
-          .filter(({ value }) => value !== selectValueSecondRow)}
+        options={getSelectOptionsFromCurrencies({
+          currencies,
+          filterValue: selectValueSecondRow,
+        })}
       />
       <Input value={secondInputValue} onChange={handleSecondInputValueChange} />
       <Select
         value={selectValueSecondRow}
         onChange={handleSelectChangeSecondRow}
-        options={currencies
-          .map(({ currency }) => ({
-            value: currency,
-            label: currency,
-          }))
-          .filter(({ value }) => value !== selectValueFirstRow)}
+        options={getSelectOptionsFromCurrencies({
+          currencies,
+          filterValue: selectValueFirstRow,
+        })}
       />
     </>
   );
