@@ -24,34 +24,38 @@ const allCurrenciesSetUp = [
 
 function DetailsPage({ currencies }) {
   const [currentSetUp, setCurrentSetUp] = useState({
-    base: "PLN",
-    second: "USD",
-    change: 0.234,
-    reversedChange: 4.261,
+    // base: "PLN",
+    // second: "USD",
+    // change: 1.233,
+    // reversedChange: 123123,
   });
 
-  const { currency } = useParams();
-  const upperCaseCurrency = currency.toUpperCase();
+  const { baseCurrency, secondCurrency } = useParams();
+  const upperCaseBaseCurrency = baseCurrency.toUpperCase();
+  const upperCaseSecondCurrency = secondCurrency.toUpperCase();
 
   const [baseInputValue, setBaseInputValue] = useState(1);
-  const [selectValueFirstRow, setSelectValueFirstRow] =
-    useState(upperCaseCurrency);
+  const [secondInputValue, setSecondInputValue] = useState();
+  // 1 * currentSetUp.change
+  const [selectValueFirstRow, setSelectValueFirstRow] = useState(
+    upperCaseBaseCurrency
+  );
   const [selectValueSecondRow, setSelectValueSecondRow] = useState(
-    currency === "USD" ? "PLN" : "USD"
+    upperCaseSecondCurrency
   );
-  const [secondInputValue, setSecondInputValue] = useState(
-    1 * currentSetUp.change
-  );
+
   const handleBaseInputValueChange = (event) => {
     const value = event.target.value;
     setBaseInputValue(value);
     setSecondInputValue(value * currentSetUp.change);
   };
+
   const handleSecondInputValueChange = (event) => {
     const value = event.target.value;
     setSecondInputValue(value);
     setBaseInputValue(value * currentSetUp.reversedChange);
   };
+
   const handleSelectChangeFirstRow = (event) => {
     const value = event.target.value;
     setSelectValueFirstRow(value);
@@ -64,20 +68,24 @@ function DetailsPage({ currencies }) {
       return setUp.name === `${currentSetUp.second}-${value}`;
     }).change;
     setCurrentSetUp(newSetup);
+    console.log(currentSetUp);
   };
+
   const handleSelectChangeSecondRow = (event) => {
     const value = event.target.value;
     setSelectValueSecondRow(value);
     const newSetup = { ...currentSetUp };
-    newSetup.reversed = value;
+    newSetup.second = value;
     newSetup.change = [...allCurrenciesSetUp].find((setUp) => {
       return setUp.name === `${currentSetUp.base}-${value}`;
     }).change;
-    newSetup.reversedChange = allCurrenciesSetUp.find((setUp) => {
+    newSetup.reversedChange = [...allCurrenciesSetUp].find((setUp) => {
       return setUp.name === `${value}-${currentSetUp.base}`;
     }).change;
     setCurrentSetUp(newSetup);
+    console.log(currentSetUp);
   };
+
   useEffect(() => {
     setBaseInputValue(1);
     setSecondInputValue(1 * currentSetUp.change);

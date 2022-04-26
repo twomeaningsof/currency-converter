@@ -42,7 +42,11 @@ function CurrenciesListPage({ currencies }) {
               <Td variant="body">
                 <div className="currency-comparison-cell-inside-wrapper">
                   <div>{name}</div>
-                  <Link to={`/details/${selectValue.toLowerCase()}`}>
+                  <Link
+                    to={`/details/${selectValue.toLowerCase()}/${name
+                      .split("-")[1]
+                      .toLowerCase()}`}
+                  >
                     <button className="details-vector"></button>
                   </Link>
                 </div>

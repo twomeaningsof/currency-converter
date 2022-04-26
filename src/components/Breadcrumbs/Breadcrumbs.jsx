@@ -20,7 +20,6 @@ function Breadcrumbs({ routes }) {
         {variant === "long" &&
           routes.map((pageName, index) => {
             const withClass = index + 1 === routes.length;
-            console.log(pageName, index);
             return index === 0 ? (
               <Link key={pageName} to="/" className="navigation__element">
                 <ListItem>{pageName}</ListItem>
