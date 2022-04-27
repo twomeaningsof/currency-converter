@@ -7,6 +7,12 @@ import { useParams } from "react-router-dom";
 import { getSelectOptionsFromCurrencies } from "../utils/getSelectOptionsFromCurrencies";
 import { routes } from "../constants/routes";
 
+const getChange = (setUpArray, base, second) => {
+  return [...setUpArray].find((setUp) => {
+    return setUp.name === `${base}-${second}`;
+  }).change;
+};
+
 const allCurrenciesSetUp = [
   { name: "USD-EUR", value: 1, change: 0.924 },
   { name: "USD-GBP", value: 1, change: 0.762 },
@@ -23,20 +29,27 @@ const allCurrenciesSetUp = [
 ];
 
 function DetailsPage({ currencies }) {
-  const [currentSetUp, setCurrentSetUp] = useState({
-    // base: "PLN",
-    // second: "USD",
-    // change: 1.233,
-    // reversedChange: 123123,
-  });
-
   const { baseCurrency, secondCurrency } = useParams();
   const upperCaseBaseCurrency = baseCurrency.toUpperCase();
   const upperCaseSecondCurrency = secondCurrency.toUpperCase();
 
+  const [currentSetUp, setCurrentSetUp] = useState({
+    base: upperCaseBaseCurrency,
+    second: upperCaseSecondCurrency,
+    change: getChange(
+      allCurrenciesSetUp,
+      upperCaseBaseCurrency,
+      upperCaseSecondCurrency
+    ),
+    reversedChange: getChange(
+      allCurrenciesSetUp,
+      upperCaseSecondCurrency,
+      upperCaseBaseCurrency
+    ),
+  });
+
   const [baseInputValue, setBaseInputValue] = useState(1);
-  const [secondInputValue, setSecondInputValue] = useState();
-  // 1 * currentSetUp.change
+  const [secondInputValue, setSecondInputValue] = useState(currentSetUp.change);
   const [selectValueFirstRow, setSelectValueFirstRow] = useState(
     upperCaseBaseCurrency
   );
@@ -61,14 +74,17 @@ function DetailsPage({ currencies }) {
     setSelectValueFirstRow(value);
     const newSetup = { ...currentSetUp };
     newSetup.base = value;
-    newSetup.change = [...allCurrenciesSetUp].find((setUp) => {
-      return setUp.name === `${value}-${currentSetUp.second}`;
-    }).change;
-    newSetup.reversedChange = allCurrenciesSetUp.find((setUp) => {
-      return setUp.name === `${currentSetUp.second}-${value}`;
-    }).change;
+    newSetup.change = getChange(
+      allCurrenciesSetUp,
+      newSetup.base,
+      currentSetUp.second
+    );
+    newSetup.reversedChange = getChange(
+      allCurrenciesSetUp,
+      currentSetUp.second,
+      newSetup.base
+    );
     setCurrentSetUp(newSetup);
-    console.log(currentSetUp);
   };
 
   const handleSelectChangeSecondRow = (event) => {
@@ -76,14 +92,17 @@ function DetailsPage({ currencies }) {
     setSelectValueSecondRow(value);
     const newSetup = { ...currentSetUp };
     newSetup.second = value;
-    newSetup.change = [...allCurrenciesSetUp].find((setUp) => {
-      return setUp.name === `${currentSetUp.base}-${value}`;
-    }).change;
-    newSetup.reversedChange = [...allCurrenciesSetUp].find((setUp) => {
-      return setUp.name === `${value}-${currentSetUp.base}`;
-    }).change;
+    newSetup.change = getChange(
+      allCurrenciesSetUp,
+      currentSetUp.base,
+      newSetup.second
+    );
+    newSetup.reversedChange = getChange(
+      allCurrenciesSetUp,
+      newSetup.second,
+      currentSetUp.base
+    );
     setCurrentSetUp(newSetup);
-    console.log(currentSetUp);
   };
 
   useEffect(() => {
