@@ -8,10 +8,10 @@ import { getMockCurrencies } from "../utils/getMockCurrencies";
 import { routes } from "../constants/routes";
 
 function CurrenciesListPage({ currencies }) {
-  const [selectValue, setSelectValue] = useState("PLN");
-  const currencyList = getMockCurrencies(selectValue);
+  const [baseCurrency, setBaseCurrency] = useState("PLN");
+  const currencyList = getMockCurrencies(baseCurrency);
 
-  const handleSelectChange = (event) => setSelectValue(event.target.value);
+  const handleSelectChange = (event) => setBaseCurrency(event.target.value);
 
   return (
     <>
@@ -19,7 +19,7 @@ function CurrenciesListPage({ currencies }) {
       <Heading variant="h1">Currency converter</Heading>
       <Heading variant="h2">Choose base currency</Heading>
       <Select
-        value={selectValue}
+        value={baseCurrency}
         onChange={handleSelectChange}
         options={currencies.map(({ currency }) => ({
           value: currency,
@@ -43,11 +43,11 @@ function CurrenciesListPage({ currencies }) {
                 <div className="currency-comparison-cell-inside-wrapper">
                   <div>{name}</div>
                   <Link
-                    to={`/details/${selectValue.toLowerCase()}/${name
+                    to={`/details/${baseCurrency.toLowerCase()}/${name
                       .split("-")[1]
                       .toLowerCase()}`}
                   >
-                    <button className="details-vector"></button>
+                    <div className="details-vector"></div>
                   </Link>
                 </div>
               </Td>

@@ -8,17 +8,17 @@
   font-size: 16px;
 }
 
-.navigation__element {
-  color: rgba(0, 0, 0, 0.54);
+.navigation__link {
+  cursor: pointer;
   text-decoration: none;
+}
+
+.navigation__item {
+  color: rgba(0, 0, 0, 0.54);
   cursor: pointer;
 }
 
-.navigation__element li {
-  cursor: pointer;
-}
-
-.navigation__element--active {
+.navigation__item--active {
   font-weight: 500;
 }
 

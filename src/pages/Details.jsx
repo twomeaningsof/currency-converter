@@ -57,51 +57,35 @@ function DetailsPage({ currencies }) {
     upperCaseSecondCurrency
   );
 
-  const handleBaseInputValueChange = (event) => {
-    const value = event.target.value;
+  const handleBaseInputValueChange = ({ target: { value } }) => {
     setBaseInputValue(value);
     setSecondInputValue(value * currentSetUp.change);
   };
 
-  const handleSecondInputValueChange = (event) => {
-    const value = event.target.value;
+  const handleSecondInputValueChange = ({ target: { value } }) => {
     setSecondInputValue(value);
     setBaseInputValue(value * currentSetUp.reversedChange);
   };
 
-  const handleSelectChangeFirstRow = (event) => {
-    const value = event.target.value;
+  const handleSelectChangeFirstRow = ({ target: { value } }) => {
     setSelectValueFirstRow(value);
-    const newSetup = { ...currentSetUp };
-    newSetup.base = value;
-    newSetup.change = getChange(
-      allCurrenciesSetUp,
-      newSetup.base,
-      currentSetUp.second
-    );
-    newSetup.reversedChange = getChange(
-      allCurrenciesSetUp,
-      currentSetUp.second,
-      newSetup.base
-    );
+    const newSetup = {
+      ...currentSetUp,
+      base: value,
+      change: getChange(allCurrenciesSetUp, value, currentSetUp.second),
+      reversedChange: getChange(allCurrenciesSetUp, currentSetUp.second, value),
+    };
     setCurrentSetUp(newSetup);
   };
 
-  const handleSelectChangeSecondRow = (event) => {
-    const value = event.target.value;
+  const handleSelectChangeSecondRow = ({ target: { value } }) => {
     setSelectValueSecondRow(value);
-    const newSetup = { ...currentSetUp };
-    newSetup.second = value;
-    newSetup.change = getChange(
-      allCurrenciesSetUp,
-      currentSetUp.base,
-      newSetup.second
-    );
-    newSetup.reversedChange = getChange(
-      allCurrenciesSetUp,
-      newSetup.second,
-      currentSetUp.base
-    );
+    const newSetup = {
+      ...currentSetUp,
+      second: value,
+      change: getChange(allCurrenciesSetUp, currentSetUp.base, value),
+      reversedChange: getChange(allCurrenciesSetUp, value, currentSetUp.base),
+    };
     setCurrentSetUp(newSetup);
   };
 
