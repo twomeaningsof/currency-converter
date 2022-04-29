@@ -45,7 +45,7 @@ function CurrenciesListPage({ currencies }) {
                   <div className="currency-comparison-cell-inside-wrapper">
                     <div>{name}</div>
                     <Link
-                      to={`/details/${baseCurrency.toLowerCase()}/${secondaryCurrency}`}
+                      to={`/details/${baseCurrency.toLowerCase()}/${secondaryCurrency.toLowerCase()}`}
                     >
                       <div className="details-vector"></div>
                     </Link>
