@@ -1,6 +1,5 @@
-import "./Breadcrumbs.css";
 import { Link } from "react-router-dom";
-import React from "react";
+import "./Breadcrumbs.css";
 
 function Breadcrumbs({ routes }) {
   const variant = routes.length === 1 ? "short" : "long";
