@@ -1,8 +1,17 @@
+import { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
+import { routes } from "../constants/routes";
+import { getSelectOptionsFromCurrencies } from "../utils/getSelectOptionsFromCurrencies";
+import Breadcrumbs from "../components/Breadcrumbs";
 import Heading from "../components/Heading";
 import Select from "../components/Select";
 import Input from "../components/Input";
-import { useState, useEffect } from "react";
-import { getSelectOptionsFromCurrencies } from "../utils/getSelectOptionsFromCurrencies";
+
+const getChange = (setUpArray, base, second) => {
+  return [...setUpArray].find((setUp) => {
+    return setUp.name === `${base}-${second}`;
+  }).change;
+};
 
 const allCurrenciesSetUp = [
   { name: "USD-EUR", value: 1, change: 0.924 },
@@ -20,55 +29,66 @@ const allCurrenciesSetUp = [
 ];
 
 function DetailsPage({ currencies }) {
+  const { baseCurrency, secondCurrency } = useParams();
+  const upperCaseBaseCurrency = baseCurrency.toUpperCase();
+  const upperCaseSecondCurrency = secondCurrency.toUpperCase();
+
   const [currentSetUp, setCurrentSetUp] = useState({
-    base: "PLN",
-    second: "USD",
-    change: 0.234,
-    reversedChange: 4.261,
+    base: upperCaseBaseCurrency,
+    second: upperCaseSecondCurrency,
+    change: getChange(
+      allCurrenciesSetUp,
+      upperCaseBaseCurrency,
+      upperCaseSecondCurrency
+    ),
+    reversedChange: getChange(
+      allCurrenciesSetUp,
+      upperCaseSecondCurrency,
+      upperCaseBaseCurrency
+    ),
   });
 
   const [baseInputValue, setBaseInputValue] = useState(1);
-  const [selectValueFirstRow, setSelectValueFirstRow] = useState("PLN");
-  const [selectValueSecondRow, setSelectValueSecondRow] = useState("USD");
-  const [secondInputValue, setSecondInputValue] = useState(
-    1 * currentSetUp.change
+  const [secondInputValue, setSecondInputValue] = useState(currentSetUp.change);
+  const [selectValueFirstRow, setSelectValueFirstRow] = useState(
+    upperCaseBaseCurrency
   );
-  const handleBaseInputValueChange = (event) => {
-    const value = event.target.value;
+  const [selectValueSecondRow, setSelectValueSecondRow] = useState(
+    upperCaseSecondCurrency
+  );
+
+  const handleBaseInputValueChange = ({ target: { value } }) => {
     setBaseInputValue(value);
     setSecondInputValue(value * currentSetUp.change);
   };
-  const handleSecondInputValueChange = (event) => {
-    const value = event.target.value;
+
+  const handleSecondInputValueChange = ({ target: { value } }) => {
     setSecondInputValue(value);
     setBaseInputValue(value * currentSetUp.reversedChange);
   };
-  const handleSelectChangeFirstRow = (event) => {
-    const value = event.target.value;
+
+  const handleSelectChangeFirstRow = ({ target: { value } }) => {
     setSelectValueFirstRow(value);
-    const newSetup = { ...currentSetUp };
-    newSetup.base = value;
-    newSetup.change = [...allCurrenciesSetUp].find((setUp) => {
-      return setUp.name === `${value}-${currentSetUp.second}`;
-    }).change;
-    newSetup.reversedChange = allCurrenciesSetUp.find((setUp) => {
-      return setUp.name === `${currentSetUp.second}-${value}`;
-    }).change;
+    const newSetup = {
+      ...currentSetUp,
+      base: value,
+      change: getChange(allCurrenciesSetUp, value, currentSetUp.second),
+      reversedChange: getChange(allCurrenciesSetUp, currentSetUp.second, value),
+    };
     setCurrentSetUp(newSetup);
   };
-  const handleSelectChangeSecondRow = (event) => {
-    const value = event.target.value;
+
+  const handleSelectChangeSecondRow = ({ target: { value } }) => {
     setSelectValueSecondRow(value);
-    const newSetup = { ...currentSetUp };
-    newSetup.reversed = value;
-    newSetup.change = [...allCurrenciesSetUp].find((setUp) => {
-      return setUp.name === `${currentSetUp.base}-${value}`;
-    }).change;
-    newSetup.reversedChange = allCurrenciesSetUp.find((setUp) => {
-      return setUp.name === `${value}-${currentSetUp.base}`;
-    }).change;
+    const newSetup = {
+      ...currentSetUp,
+      second: value,
+      change: getChange(allCurrenciesSetUp, currentSetUp.base, value),
+      reversedChange: getChange(allCurrenciesSetUp, value, currentSetUp.base),
+    };
     setCurrentSetUp(newSetup);
   };
+
   useEffect(() => {
     setBaseInputValue(1);
     setSecondInputValue(1 * currentSetUp.change);
@@ -76,6 +96,7 @@ function DetailsPage({ currencies }) {
 
   return (
     <>
+      <Breadcrumbs routes={routes} />
       <Heading variant="h1">Currency converter</Heading>
       <Heading variant="h2">Convert values</Heading>
       <Input value={baseInputValue} onChange={handleBaseInputValueChange} />
