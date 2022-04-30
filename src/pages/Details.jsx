@@ -28,6 +28,8 @@ const allCurrenciesSetUp = [
   { name: "GBP-USD", value: 1, change: 1.312 },
 ];
 
+const ratesDate = "2022-04-30";
+
 function DetailsPage({ currencies }) {
   const { baseCurrency, secondCurrency } = useParams();
   const upperCaseBaseCurrency = baseCurrency.toUpperCase();
@@ -99,6 +101,7 @@ function DetailsPage({ currencies }) {
       <Breadcrumbs routes={routes} />
       <Heading variant="h1">Currency converter</Heading>
       <Heading variant="h2">Convert values</Heading>
+      <div className="date">{ratesDate}</div>
       <Input value={baseInputValue} onChange={handleBaseInputValueChange} />
       <Select
         value={selectValueFirstRow}
