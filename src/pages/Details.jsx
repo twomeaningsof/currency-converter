@@ -4,6 +4,7 @@ import { routes } from "../constants/routes";
 import { getSelectOptionsFromCurrencies } from "../utils/getSelectOptionsFromCurrencies";
 import Breadcrumbs from "../components/Breadcrumbs";
 import Heading from "../components/Heading";
+import Date from "../components/Date";
 import Select from "../components/Select";
 import Input from "../components/Input";
 
@@ -99,6 +100,7 @@ function DetailsPage({ currencies }) {
       <Breadcrumbs routes={routes} />
       <Heading variant="h1">Currency converter</Heading>
       <Heading variant="h2">Convert values</Heading>
+      <Date ratesDate="2022-04-24" />
       <Input value={baseInputValue} onChange={handleBaseInputValueChange} />
       <Select
         value={selectValueFirstRow}
