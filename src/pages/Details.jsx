@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
+import dayjs from "dayjs";
+import localizedFormat from "dayjs/plugin/localizedFormat";
 import { routes } from "../constants/routes";
 import { getSelectOptionsFromCurrencies } from "../utils/getSelectOptionsFromCurrencies";
 import Breadcrumbs from "../components/Breadcrumbs";
@@ -28,7 +30,8 @@ const allCurrenciesSetUp = [
   { name: "GBP-USD", value: 1, change: 1.312 },
 ];
 
-const ratesDate = "2022-04-30";
+dayjs.extend(localizedFormat);
+const ratesDate = dayjs("2022-04-30", "YYYY-MM-DD").format("LL");
 
 function DetailsPage({ currencies }) {
   const { baseCurrency, secondCurrency } = useParams();
