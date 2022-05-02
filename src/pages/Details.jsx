@@ -1,11 +1,10 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import dayjs from "dayjs";
-import localizedFormat from "dayjs/plugin/localizedFormat";
 import { routes } from "../constants/routes";
 import { getSelectOptionsFromCurrencies } from "../utils/getSelectOptionsFromCurrencies";
 import Breadcrumbs from "../components/Breadcrumbs";
 import Heading from "../components/Heading";
+import Date from "../components/Date";
 import Select from "../components/Select";
 import Input from "../components/Input";
 
@@ -29,9 +28,6 @@ const allCurrenciesSetUp = [
   { name: "GBP-PLN", value: 1, change: 5.601 },
   { name: "GBP-USD", value: 1, change: 1.312 },
 ];
-
-dayjs.extend(localizedFormat);
-const ratesDate = dayjs("2022-04-30", "YYYY-MM-DD").format("LL");
 
 function DetailsPage({ currencies }) {
   const { baseCurrency, secondCurrency } = useParams();
@@ -104,7 +100,7 @@ function DetailsPage({ currencies }) {
       <Breadcrumbs routes={routes} />
       <Heading variant="h1">Currency converter</Heading>
       <Heading variant="h2">Convert values</Heading>
-      <div className="date">{ratesDate}</div>
+      <Date ratesDate="2022-04-24" />
       <Input value={baseInputValue} onChange={handleBaseInputValueChange} />
       <Select
         value={selectValueFirstRow}
