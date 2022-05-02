@@ -1,33 +1,24 @@
-import { useState, useEffect } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { useFetchCurrencies } from "./hooks/useFetchCurrencies";
 import CurrenciesListPage from "./pages/CurrenciesList";
 import DetailsPage from "./pages/Details";
-import { getCurrencies } from "./api/getCurrencies";
-import { mapDataToCurrencies } from "./utils/mapDataToCurrencies";
 
 function App() {
-  const [data, setData] = useState({ currencies: [], isLoaded: false });
+  const currencies = useFetchCurrencies();
 
-  useEffect(() => {
-    const fetchCurrencies = async () => {
-      setData({
-        currencies: mapDataToCurrencies(await getCurrencies()),
-        isLoaded: true,
-      });
-    };
-    fetchCurrencies().catch(console.error);
-  }, []);
-
+  if (!currencies) {
+    return <div></div>;
+  }
   return (
     <BrowserRouter>
       <Routes>
         <Route
           path="/"
-          element={<CurrenciesListPage currencies={data.currencies} />}
+          element={<CurrenciesListPage currencies={currencies} />}
         />
         <Route
           path="/details/:baseCurrency/:secondCurrency"
-          element={<DetailsPage currencies={data.currencies} />}
+          element={<DetailsPage currencies={currencies} />}
         />
       </Routes>
     </BrowserRouter>
