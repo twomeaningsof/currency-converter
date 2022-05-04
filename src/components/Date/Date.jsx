@@ -2,9 +2,9 @@ import dayjs from "dayjs";
 import localizedFormat from "dayjs/plugin/localizedFormat";
 import "./Date.css";
 
-function Date({ ratesDate }) {
+function Date({ date, format }) {
   dayjs.extend(localizedFormat);
-  const ratesDateFormatted = dayjs(ratesDate).format("LL");
+  const ratesDateFormatted = dayjs(date).format(format);
   return <div className="date">{ratesDateFormatted}</div>;
 }
 

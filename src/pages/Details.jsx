@@ -100,7 +100,7 @@ function DetailsPage({ currencies }) {
       <Breadcrumbs routes={routes} />
       <Heading variant="h1">Currency converter</Heading>
       <Heading variant="h2">Convert values</Heading>
-      <Date ratesDate="2022-04-24" />
+      <Date date="2022-04-25" format="LL" />
       <Input value={baseInputValue} onChange={handleBaseInputValueChange} />
       <Select
         value={selectValueFirstRow}
