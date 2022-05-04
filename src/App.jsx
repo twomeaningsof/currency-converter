@@ -4,11 +4,11 @@ import CurrenciesListPage from "./pages/CurrenciesList";
 import DetailsPage from "./pages/Details";
 
 function App() {
-  const currencies = useFetchCurrencies();
+  const { currencies, loading, error } = useFetchCurrencies();
 
-  if (!currencies) {
-    return <div></div>;
-  }
+  if (loading) return <div>loading...</div>;
+  if (error) return <div>{error.message}</div>;
+
   return (
     <BrowserRouter>
       <Routes>

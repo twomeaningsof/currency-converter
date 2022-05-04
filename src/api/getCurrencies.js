@@ -1,13 +1,4 @@
-import { endpoint } from "../constants/endpoint";
+import { apiUrl } from "../constants/apiUrl";
 
-export const getCurrencies = async () => {
-  try {
-    const response = await fetch(`${endpoint}.json`);
-
-    const data = await response.json();
-
-    return data;
-  } catch (err) {
-    console.log("problemik");
-  }
-};
+export const getCurrencies = async () =>
+  await fetch(`${apiUrl}/currencies.json`);
