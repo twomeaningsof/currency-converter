@@ -8,7 +8,7 @@ import Select from "../components/Select";
 import Table, { Thead, Tbody, Tr, Td } from "../components/Table";
 
 function CurrenciesListPage({ currencies }) {
-  const [baseCurrency, setBaseCurrency] = useState("PLN");
+  const [baseCurrency, setBaseCurrency] = useState("usd");
   const currencyList = getMockCurrencies(baseCurrency);
 
   const handleSelectChange = (event) => setBaseCurrency(event.target.value);
@@ -44,9 +44,7 @@ function CurrenciesListPage({ currencies }) {
                 <Td variant="body">
                   <div className="currency-comparison-cell-inside-wrapper">
                     <div>{name}</div>
-                    <Link
-                      to={`/details/${baseCurrency.toLowerCase()}/${secondaryCurrency.toLowerCase()}`}
-                    >
+                    <Link to={`/details/${baseCurrency}/${secondaryCurrency}`}>
                       <div className="details-vector"></div>
                     </Link>
                   </div>
