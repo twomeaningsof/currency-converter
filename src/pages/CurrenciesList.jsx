@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import { routes } from "../constants/routes";
 import { getMockCurrencies } from "../utils/getMockCurrencies";
@@ -8,14 +8,10 @@ import Select from "../components/Select";
 import Table, { Thead, Tbody, Tr, Td } from "../components/Table";
 
 function CurrenciesListPage({ currencies }) {
-  const [baseCurrency, setBaseCurrency] = useState("");
+  const [baseCurrency, setBaseCurrency] = useState("usd");
   const currencyList = getMockCurrencies(baseCurrency);
 
   const handleSelectChange = (event) => setBaseCurrency(event.target.value);
-
-  useEffect(() => {
-    setBaseCurrency("usd");
-  }, []);
 
   return (
     <>
