@@ -38,9 +38,21 @@ function CurrenciesListPage({ currencies }) {
         </Thead>
         {loading ? (
           error ? (
-            <div>{error.message}</div>
+            <Tbody>
+              <Tr>
+                <Td variant="body" isInfo>
+                  {error.message}
+                </Td>
+              </Tr>
+            </Tbody>
           ) : (
-            <div>loading...</div>
+            <Tbody>
+              <Tr>
+                <Td variant="body" isInfo>
+                  loading...
+                </Td>
+              </Tr>
+            </Tbody>
           )
         ) : (
           <Tbody>

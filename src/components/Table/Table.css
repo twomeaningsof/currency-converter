@@ -50,6 +50,10 @@ tbody {
   cursor: pointer;
 }
 
+.info-cell {
+  border: none;
+}
+
 .middle-cell {
   border-left: 1px solid #c2c9d1;
   border-right: 1px solid #c2c9d1;
