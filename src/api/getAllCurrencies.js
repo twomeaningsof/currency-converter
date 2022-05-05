@@ -1,4 +1,4 @@
 import { apiUrl } from "../constants/apiUrl";
 
-export const getCurrencies = async () =>
+export const getAllCurrencies = async () =>
   await fetch(`${apiUrl}/currencies.json`);

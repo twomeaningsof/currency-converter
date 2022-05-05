@@ -1,18 +1,13 @@
-tr {
-  height: 40px;
-}
-
-td {
-  border-bottom: 1px solid #c2c9d1;
-}
-
 table {
   font-size: 12px;
   border-collapse: collapse;
-  min-width: 570px;
+  border-spacing: 0;
+  text-indent: 0;
+  border-color: unset;
 }
 
 thead {
+  display: table;
   font-size: 20px;
   font-weight: 700;
   background: linear-gradient(
@@ -20,21 +15,24 @@ thead {
       rgba(255, 255, 255, 0.9),
       rgba(255, 255, 255, 0.9)
     ),
-    #c2c9d1;
+    #a6adb6;
 }
 
 .header-cell {
-  padding-top: 8px;
-  padding-left: 14px;
+  /* padding-top: 8px; */
+  /* padding-left: 16px; */
 }
 
 tbody {
+  height: 300px;
+  display: block;
+  overflow-y: auto;
   font-family: "Open Sans", sans-serif;
 }
 
-.body-cell {
+/* .body-cell {
   padding-left: 16px;
-}
+} */
 
 .currency-comparison-cell-inside-wrapper {
   display: flex;
@@ -46,7 +44,7 @@ tbody {
 .details-vector {
   width: 25px;
   height: 28px;
-  margin-right: 14px;
+  padding-right: 14px;
   border: none;
   background: url("../../img/Vector.png") no-repeat center center;
   cursor: pointer;
@@ -55,4 +53,17 @@ tbody {
 .middle-cell {
   border-left: 1px solid #c2c9d1;
   border-right: 1px solid #c2c9d1;
+}
+
+tr {
+  height: 40px;
+  display: table;
+  table-layout: fixed;
+}
+
+td {
+  width: 200px;
+  padding: 0;
+  border-bottom: 1px solid #c2c9d1;
+  text-transform: uppercase;
 }
