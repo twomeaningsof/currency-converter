@@ -12,8 +12,10 @@ export function useFetchAllCurrencies() {
     const fetchCurrencies = async () => {
       setLoading(true);
       const [data, error] = await fetchWithErrorHandling(getAllCurrencies);
-      const currencies = mapDataToAllCurrencies(data);
-      setCurrencies(currencies);
+      if (!error) {
+        const currencies = mapDataToAllCurrencies(data);
+        setCurrencies(currencies);
+      }
       setError(error);
       setLoading(false);
     };

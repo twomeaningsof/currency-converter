@@ -19,6 +19,7 @@ thead {
 }
 
 .header-cell {
+  /* Will be fixed in the PR related to issue #23 */
   /* padding-top: 8px; */
   /* padding-left: 16px; */
 }
@@ -30,6 +31,7 @@ tbody {
   font-family: "Open Sans", sans-serif;
 }
 
+/* Will be fixed in the PR related to issue #23 */
 /* .body-cell {
   padding-left: 16px;
 } */
@@ -52,6 +54,7 @@ tbody {
 
 .info-cell {
   border: none;
+  text-transform: capitalize;
 }
 
 .middle-cell {
