@@ -1,10 +1,10 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { useFetchCurrencies } from "./hooks/useFetchCurrencies";
+import { useFetchAllCurrencies } from "./hooks/useFetchAllCurrencies";
 import CurrenciesListPage from "./pages/CurrenciesList";
 import DetailsPage from "./pages/Details";
 
 function App() {
-  const { currencies, loading, error } = useFetchCurrencies();
+  const { currencies, loading, error } = useFetchAllCurrencies();
 
   if (loading) return <div>loading...</div>;
   if (error) return <div>{error.message}</div>;

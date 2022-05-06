@@ -18,12 +18,16 @@ export function Tr({ children, ...props }) {
   return <tr {...props}>{children}</tr>;
 }
 
-export function Td({ variant, isMiddle, children, ...props }) {
+export function Td({ variant, isMiddle, isInfo, children, ...props }) {
   const variantClassName = variant === "header" ? "header-cell" : "body-cell";
   const middleClassName = isMiddle ? "middle-cell" : "";
+  const infoClassName = isInfo ? "info-cell" : "";
 
   return (
-    <td className={`${middleClassName} ${variantClassName}`} {...props}>
+    <td
+      className={`${infoClassName} ${middleClassName} ${variantClassName}`}
+      {...props}
+    >
       {children}
     </td>
   );

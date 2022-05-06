@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react";
-import { getCurrencies } from "../api/getCurrencies";
+import { getAllCurrencies } from "../api/getAllCurrencies";
 import { fetchWithErrorHandling } from "../utils/fetchWithErrorHandling";
-import { mapDataToCurrencies } from "../utils/mapDataToCurrencies";
+import { mapDataToAllCurrencies } from "../utils/mapDataToAllCurrencies";
 
-export function useFetchCurrencies() {
+export function useFetchAllCurrencies() {
   const [currencies, setCurrencies] = useState([]);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -11,9 +11,11 @@ export function useFetchCurrencies() {
   useEffect(() => {
     const fetchCurrencies = async () => {
       setLoading(true);
-      const [data, error] = await fetchWithErrorHandling(getCurrencies);
-      const currencies = mapDataToCurrencies(data);
-      setCurrencies(currencies);
+      const [data, error] = await fetchWithErrorHandling(getAllCurrencies);
+      if (!error) {
+        const currencies = mapDataToAllCurrencies(data);
+        setCurrencies(currencies);
+      }
       setError(error);
       setLoading(false);
     };
