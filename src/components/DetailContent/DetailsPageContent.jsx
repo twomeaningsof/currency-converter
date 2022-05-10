@@ -68,13 +68,12 @@ export function DetailsPageContent({
   }, [currentSetUp]);
 
   useEffect(() => {
-    const newSetup = {
+    setCurrentSetUp({
       base: baseCurrency,
       second: secondCurrency,
       change: baseToSecondCurrencyRate,
       reversedChange: secondToBaseCurrencyRate,
-    };
-    setCurrentSetUp(newSetup);
+    });
   }, [
     baseToSecondCurrencyRate,
     secondToBaseCurrencyRate,
