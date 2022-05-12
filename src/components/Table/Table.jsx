@@ -1,7 +1,11 @@
 import "./Table.css";
 
 function Table({ children, ...props }) {
-  return <table {...props}>{children}</table>;
+  return (
+    <div className="table-wrapper">
+      <table {...props}>{children}</table>
+    </div>
+  );
 }
 
 export default Table;

@@ -1,13 +1,20 @@
+.table-wrapper {
+  display: inline-block;
+  height: 250px;
+  overflow-y: auto;
+}
+
 table {
   font-size: 12px;
-  border-collapse: collapse;
-  border-spacing: 0;
   text-indent: 0;
+  border-spacing: 0;
   border-color: unset;
 }
 
 thead {
   display: table;
+  position: sticky;
+  top: 0;
   font-size: 20px;
   font-weight: 700;
   background: linear-gradient(
@@ -15,19 +22,16 @@ thead {
       rgba(255, 255, 255, 0.9),
       rgba(255, 255, 255, 0.9)
     ),
-    #a6adb6;
+    #72777c;
 }
 
 .header-cell {
-  /* Will be fixed in the PR related to issue #23 */
-  /* padding-top: 8px; */
-  /* padding-left: 16px; */
+  text-transform: none;
+  padding-top: 8px;
+  padding-bottom: 2px;
 }
 
 tbody {
-  height: 300px;
-  display: block;
-  overflow-y: auto;
   font-family: "Open Sans", sans-serif;
 }
 
@@ -47,7 +51,6 @@ tbody {
   width: 25px;
   height: 28px;
   padding-right: 14px;
-  border: none;
   background: url("../../img/Vector.png") no-repeat center center;
   cursor: pointer;
 }
@@ -58,19 +61,19 @@ tbody {
 }
 
 .middle-cell {
-  border-left: 1px solid #c2c9d1;
-  border-right: 1px solid #c2c9d1;
+  border-left: 1px solid rgba(194, 201, 209, 0.596);
+  border-right: 1px solid rgba(194, 201, 209, 0.596);
 }
 
 tr {
   height: 40px;
   display: table;
-  table-layout: fixed;
 }
 
 td {
   width: 200px;
   padding: 0;
-  border-bottom: 1px solid #c2c9d1;
+  padding-left: 15px;
+  border-bottom: 1px solid rgba(194, 201, 209, 0.596);
   text-transform: uppercase;
 }
