@@ -6,6 +6,7 @@ import Heading from "../components/Heading";
 import Date from "../components/Date";
 import DetailsPageContent from "../components/DetailContent";
 import { useFetchTwoCurrenciesRates } from "../hooks/useFetchTwoCurrenciesRates";
+import { useFetchDate } from "../hooks/useFetchDate";
 
 function DetailsPage({ currencies }) {
   const { baseCurrency, secondCurrency } = useParams();
@@ -15,6 +16,8 @@ function DetailsPage({ currencies }) {
     change: 0,
     reversedChange: 0,
   });
+
+  const { date, dateError, dateLoading } = useFetchDate(baseCurrency);
 
   const { baseToSecondCurrencyRate, secondToBaseCurrencyRate, loading, error } =
     useFetchTwoCurrenciesRates(currentSetUp.base, currentSetUp.second);
@@ -28,7 +31,9 @@ function DetailsPage({ currencies }) {
       <Heading variant="h1">Currency converter</Heading>
       <div className="heading-date-wrapper">
         <Heading variant="h2">Convert values</Heading>
-        <Date date="2022-04-25" format="LL" />
+        {dateError && <div className="info-element">{dateError.message}</div>}
+        {dateLoading && <div className="info-element">loading...</div>}
+        {!(dateError || dateLoading) ? <Date date={date} format="LL" /> : null}
       </div>
       {error && <div className="info-element">{error.message}</div>}
       {loading && <div className="info-element">loading...</div>}
