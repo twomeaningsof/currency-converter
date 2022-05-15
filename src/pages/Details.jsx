@@ -26,16 +26,20 @@ function DetailsPage({ currencies }) {
     <>
       <Breadcrumbs routes={routes} />
       <Heading variant="h1">Currency converter</Heading>
-      <Heading variant="h2">Convert values</Heading>
-      <Date date="2022-04-25" format="LL" />
-      {error && <div>{error.message}</div>}
-      {loading && <div>loading...</div>}
+      <div className="heading-date-wrapper">
+        <Heading variant="h2">Convert values</Heading>
+        <Date date="2022-04-25" format="LL" />
+      </div>
+      {error && <div className="info-element">{error.message}</div>}
+      {loading && <div className="info-element">loading...</div>}
       {!(error || loading) ? (
-        <DetailsPageContent
-          currencies={currencies}
-          currentSetUp={currentSetUp}
-          handleSelect={setCurrentSetUp}
-        />
+        <div className="details-page-content-wrapper">
+          <DetailsPageContent
+            currencies={currencies}
+            currentSetUp={currentSetUp}
+            handleSelect={setCurrentSetUp}
+          />
+        </div>
       ) : null}
     </>
   );
