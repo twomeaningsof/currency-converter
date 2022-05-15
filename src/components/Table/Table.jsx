@@ -1,7 +1,11 @@
 import "./Table.css";
 
 function Table({ children, ...props }) {
-  return <table {...props}>{children}</table>;
+  return (
+    <div className="table-wrapper">
+      <table {...props}>{children}</table>
+    </div>
+  );
 }
 
 export default Table;
@@ -18,8 +22,8 @@ export function Tr({ children, ...props }) {
   return <tr {...props}>{children}</tr>;
 }
 
-export function Td({ variant, isMiddle, isInfo, children, ...props }) {
-  const variantClassName = variant === "header" ? "header-cell" : "body-cell";
+export function Td({ isHeader, isMiddle, isInfo, children, ...props }) {
+  const variantClassName = isHeader ? "header-cell" : "";
   const middleClassName = isMiddle ? "middle-cell" : "";
   const infoClassName = isInfo ? "info-cell" : "";
 

@@ -14,23 +14,25 @@ function CurrenciesListPage({ currencies }) {
     <>
       <Breadcrumbs routes={routes.slice(0, 1)} />
       <Heading variant="h1">Currency converter</Heading>
-      <Heading variant="h2">Choose base currency</Heading>
-      <Select
-        value={baseCurrency}
-        onChange={handleSelectChange}
-        options={currencies.map(({ currency }) => ({
-          value: currency,
-          label: currency,
-        }))}
-      />
+      <div className="select-currency-wrapper">
+        <Heading variant="h2">Choose base currency</Heading>
+        <Select
+          value={baseCurrency}
+          onChange={handleSelectChange}
+          options={currencies.map(({ currency }) => ({
+            value: currency,
+            label: currency,
+          }))}
+        />
+      </div>
       <Table>
         <Thead>
           <Tr key={"head"}>
-            <Td variant="header">Currency</Td>
-            <Td variant="header" isMiddle>
+            <Td isHeader>Currency</Td>
+            <Td isHeader isMiddle>
               Value
             </Td>
-            <Td variant="header">Change</Td>
+            <Td isHeader>Change</Td>
           </Tr>
         </Thead>
         <Tbody>

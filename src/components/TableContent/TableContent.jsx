@@ -10,7 +10,7 @@ function TableContent({ baseCurrency }) {
   if (error) {
     return (
       <Tr>
-        <Td variant="body" isInfo>
+        <Td variant="" isInfo>
           {error.message}
         </Td>
       </Tr>
@@ -20,9 +20,7 @@ function TableContent({ baseCurrency }) {
   if (loading) {
     return (
       <Tr>
-        <Td variant="body" isInfo>
-          loading...
-        </Td>
+        <Td isInfo>loading...</Td>
       </Tr>
     );
   }
@@ -33,7 +31,7 @@ function TableContent({ baseCurrency }) {
         const secondaryCurrency = name.split("-")[1];
         return (
           <Tr key={name}>
-            <Td variant="body">
+            <Td>
               <div className="currency-comparison-cell-inside-wrapper">
                 <div>{name}</div>
                 <Link to={`/details/${baseCurrency}/${secondaryCurrency}`}>
@@ -41,10 +39,8 @@ function TableContent({ baseCurrency }) {
                 </Link>
               </div>
             </Td>
-            <Td variant="body" isMiddle>
-              {value}
-            </Td>
-            <Td variant="body">{change}</Td>
+            <Td isMiddle>{value}</Td>
+            <Td>{change}</Td>
           </Tr>
         );
       })}
