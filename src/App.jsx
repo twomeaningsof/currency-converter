@@ -10,18 +10,23 @@ function App() {
   if (error) return <div>{error.message}</div>;
 
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route
-          path="/"
-          element={<CurrenciesListPage currencies={currencies} />}
-        />
-        <Route
-          path="/details/:baseCurrency/:secondCurrency"
-          element={<DetailsPage currencies={currencies} />}
-        />
-      </Routes>
-    </BrowserRouter>
+    <>
+      <div className="resolution-warning">
+        This resolution is not supported.
+      </div>
+      <BrowserRouter>
+        <Routes>
+          <Route
+            path="/"
+            element={<CurrenciesListPage currencies={currencies} />}
+          />
+          <Route
+            path="/details/:baseCurrency/:secondCurrency"
+            element={<DetailsPage currencies={currencies} />}
+          />
+        </Routes>
+      </BrowserRouter>
+    </>
   );
 }
 
