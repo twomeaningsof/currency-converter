@@ -1,23 +1,30 @@
-input {
-  width: 200px;
-  height: 56px;
-  margin-left: 90px;
-  margin-right: 100px;
-  padding: 10px;
-  border: 1px solid rgba(0, 0, 0, 0.87);
-  border-radius: 10px;
-  color: rgba(0, 0, 0, 0.54);
-  font-weight: 400;
-  font-size: 16px;
-  letter-spacing: 0.15px;
+@media screen and (min-width: 360px) {
+  input {
+    width: 200px;
+    height: 56px;
+    padding: 10px;
+    border: 1px solid rgba(0, 0, 0, 0.87);
+    border-radius: 10px;
+    color: rgba(0, 0, 0, 0.54);
+    font-weight: 400;
+    font-size: 16px;
+    letter-spacing: 0.15px;
+  }
+
+  input::-webkit-outer-spin-button,
+  input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+  input[type="number"] {
+    -moz-appearance: textfield;
+  }
 }
 
-input::-webkit-outer-spin-button,
-input::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
-}
-
-input[type="number"] {
-  -moz-appearance: textfield;
+@media screen and (min-width: 1024px) {
+  input {
+    margin-left: 90px;
+    margin-right: 100px;
+  }
 }
