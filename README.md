@@ -3,7 +3,7 @@ The idea for the app emerged when I needed to test my recently learned React ski
 
 ## Technologies
 - React
-- BEM + SCSS
+- CSS
 - HTML
 - [currency-rates](https://github.com/fawazahmed0/currency-api) 
 
