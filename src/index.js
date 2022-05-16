@@ -10,17 +10,15 @@ ReactDOM.render(
   document.getElementById("root")
 );
 
-window.onresize(() => {
+const initialHeight = document.body.clientHeight;
+
+const changeWindowSize = () => {
   document.body.style.setProperty("overflow", "auto");
   const metaViewport = document.querySelector("meta[name=viewport]");
   metaViewport.setAttribute(
     "content",
     "height=" + initialHeight + "px, width=device-width, initial-scale=1.0"
   );
-});
+};
 
-// const metaViewport = document.querySelector("meta[name=viewport]");
-// metaViewport.setAttribute(
-//   "content",
-//   "width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0'"
-// );
+window.onresize = changeWindowSize;
