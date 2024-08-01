@@ -1,1 +1,2 @@
-export const mapDataToTwoCurrenciesRate = (data) => data[Object.keys(data)[1]];
+export const mapDataToTwoCurrenciesRate = (data, second) =>
+  data[Object.keys(data)[1]][second];
