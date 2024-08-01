@@ -11,16 +11,23 @@ export function useFetchTwoCurrenciesRates(baseCurrency, secondCurrency) {
   useEffect(() => {
     const fetchOneToSecondCurrencyRate = async () => {
       setLoading(true);
+
       const [data, error] = await fetchWithErrorHandling(() =>
         getTwoCurrenciesRate(baseCurrency, secondCurrency)
       );
+
       if (!error) {
-        const firstToSecondCurrencyRate = mapDataToTwoCurrenciesRate(data);
+        const firstToSecondCurrencyRate = mapDataToTwoCurrenciesRate(
+          data,
+          secondCurrency
+        );
         setBaseToSecondCurrencyRate(firstToSecondCurrencyRate);
       }
+
       setError(error);
       setLoading(false);
     };
+
     fetchOneToSecondCurrencyRate();
   }, [baseCurrency, secondCurrency]);
 
